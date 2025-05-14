@@ -1,2 +1,6 @@
 #include <iostream>
-#inclide "Chat.h"
+#include "Chat.h"
+
+void Chat::start() {
+	_isChatWork = true;
+}
