@@ -50,3 +50,41 @@ void Chat::login()
 
 	} while (!_currentUser);
 }
+
+void Chat::showLoginMenu()
+{
+	_currentUser = nullptr;
+
+	char operation;
+
+	do
+	{
+		std::cout << "\033[33m" << "(1)Login" << std::endl;
+		std::cout << "(2)Registration" << std::endl;
+		std::cout << "(0)Exit" << std::endl;
+		std::cin >> operation;
+		
+		switch (operation)
+		{
+		case '1':
+			login();
+			break;
+		case '2':
+			try
+			{
+				registration()
+			}
+			catch (const std::exception& e)
+			{
+				std::cout << e.what() << std::endl;
+			}
+			break;
+		case '0':
+			_isChatWork = false;
+			break;
+		default:
+			std::cout << "Enter 1 or 2" << std::endl;
+			break;
+		}
+	} while (!_currentUser && _isChatWork);
+}
