@@ -15,13 +15,14 @@ class Chat {
 	std::shared_ptr<User> _currentUser = nullptr;
 
 	void login();
-	void singUp();
+	void registration();
 	void showChat() const;
 	void showAllUserName() const;
 	void addMessage();
 	std::vector<User>& getAllUsers() { return _userList; }
 	std::vector<Message>& getAllMessages() { return _messageList; }
 	std::shared_ptr<User> getUserByLogin(const std::string& login) const;
+	std::shared_ptr<User> getUserByName(const std::string& name) const;
 
 public:
 	void start();
