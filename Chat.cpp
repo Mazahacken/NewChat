@@ -15,7 +15,17 @@ std::shared_ptr<User> Chat::getUserByLogin(const std::string& login) const
 	return nullptr;
 }
 
-std::shared_ptr<User> Chat::getUserByLogin(const std::string name) const
+std::shared_ptr<User> Chat::getUserByName(const std::string& name) const
+{
+	for (auto& user : _userList)
+	{
+		if (name == user.getName())
+			return std::make_shared<User>(user);
+	}
+	return nullptr;
+}
+
+//std::shared_ptr<User> Chat::getUserByName(const std::string name) const
 {
 	for (auto& user : _userList)
 	{
@@ -87,4 +97,29 @@ void Chat::showLoginMenu()
 			break;
 		}
 	} while (!_currentUser && _isChatWork);
+}
+
+void Chat::registration()
+{
+	std::string login, password, name;
+
+	std::cout << "login: ";
+	std::cin >> login;
+	std::cout << "password: ";
+	std::cin >> password;
+	std::cout << "name: ";
+	std::cin >> name;
+
+	if (getUserByLogin(login) || login == "all")
+	{
+		throw UserLoginExp();
+	}
+	if (getUserByName(name) || name == "all")
+	{
+		throw UserNameExp;
+	}
+
+	User user = User(login, password, name);
+	_userList.push_back(user);
+	_currentUser = std::make_shared<User>(user);
 }
