@@ -25,16 +25,6 @@ std::shared_ptr<User> Chat::getUserByName(const std::string& name) const
 	return nullptr;
 }
 
-//std::shared_ptr<User> Chat::getUserByName(const std::string name) const
-{
-	for (auto& user : _userList)
-	{
-		if (name == user.getName())
-			return std::make_shared<User>(user);
-	}
-	return nullptr;
-}
-
 void Chat::login()
 {
 	std::string login;
@@ -122,4 +112,25 @@ void Chat::registration()
 	User user = User(login, password, name);
 	_userList.push_back(user);
 	_currentUser = std::make_shared<User>(user);
+}
+
+void Chat::addMessage()
+{
+	std::string to, text;
+
+	std::cout << "To (name or all): ";
+	std::cin >> to;
+	std::cout << "Text: ";
+	std::cin >> text;
+	getline(std::cin, text);
+
+	if (!(to == "all" || getUserByName(to)))
+	{
+		std::cout << "error" << std::endl;
+		return;
+	}
+	if (to == "all")
+		_messageList.push_back(Message{ _currentUser->getLogin(), "all",text });
+	else
+		_messageList.push_back(Message{_currentUser->getLogin(),getUserByName(to)->getLogin(), text})
 }
