@@ -134,3 +134,32 @@ void Chat::addMessage()
 	else
 		_messageList.push_back(Message{_currentUser->getLogin(),getUserByName(to)->getLogin(), text})
 }
+
+void Chat::showChat()
+{
+	std::string from, to;
+
+	std::cout << "--- Chat ---" << std::endl;
+
+	for (auto& mess : _messageList)
+	{
+
+		if (_currentUser->getLogin() == mess.getFrom() || _currentUser->getLogin() == mess.getTo() == "all")
+		{
+			from = (_currentUser->getLogin() == mess.getFrom()) ? "me" : getUserByLogin(mess.getFrom())->getName();
+
+			if (mess.getTo() == "all")
+			{
+				to = "(all)";
+			}
+			else
+			{
+				to == (_currentUser->getLogin() == mess.getTo()) ? "me" : getUserByLogin(mess.getTo())->getName();
+			}
+
+			std::cout << "Message from " << from << " to " << to << std::endl;
+			std::cout << "Text: " << mess.getText() << std::endl;
+		}
+	}
+	std::cout << "-------------" << std::endl;
+}
