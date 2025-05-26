@@ -89,6 +89,36 @@ void Chat::showLoginMenu()
 	} while (!_currentUser && _isChatWork);
 }
 
+void Chat::showUserMenu()
+{
+	char operation;
+	std::cout << "Hi" << _currentUser->getName() << std::endl;
+	while (_currentUser) {
+		std::cout << "Menu: (1)Show chat | (2)Add message | (3)User | (0)Logout";
+		std::cout << std::endl << ">> ";
+		std::cin >> operation;
+
+		switch (operation)
+		{
+		case '1':
+			showChat();
+			break;
+		case '2':
+			addMessage();
+			break;
+		case '3':
+			showAllUserName();
+			break;
+		case '0':
+			_currentUser = nullptr;
+			break;
+		default:
+			std::cout << "unknown choice.." << std::endl;
+			break;
+		}
+	}
+}
+
 void Chat::registration()
 {
 	std::string login, password, name;
