@@ -151,7 +151,7 @@ void Chat::addMessage()
 	std::cout << "To (name or all): ";
 	std::cin >> to;
 	std::cout << "Text: ";
-	std::cin >> text;
+	std::cin.ignore();
 	getline(std::cin, text);
 
 	if (!(to == "all" || getUserByName(to)))
