@@ -165,7 +165,7 @@ void Chat::addMessage()
 		_messageList.push_back(Message{_currentUser->getLogin(),getUserByName(to)->getLogin(), text})
 }
 
-void Chat::showChat()
+void Chat::showChat() const
 {
 	std::string from, to;
 
