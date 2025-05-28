@@ -193,3 +193,17 @@ void Chat::showChat() const
 	}
 	std::cout << "-------------" << std::endl;
 }
+
+void Chat::showAllUserName() const
+{
+	std::cout << "--- Users ---" << std::endl;
+	for (auto& user : _userList)
+	{
+		std::cout << user.getName();
+		if (_currentUser->getLogin() == user.getLogin())
+			std::cout << "(me)";
+
+		std::cout << std::endl;
+	}
+	std::cout << "-------------" << std::endl;
+}
