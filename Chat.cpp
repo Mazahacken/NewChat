@@ -72,7 +72,7 @@ void Chat::showLoginMenu()
 		case '2':
 			try
 			{
-				registration()
+				registration();
 			}
 			catch (const std::exception& e)
 			{
@@ -136,7 +136,7 @@ void Chat::registration()
 	}
 	if (getUserByName(name) || name == "all")
 	{
-		throw UserNameExp;
+		throw UserNameExp();
 	}
 
 	User user = User(login, password, name);
@@ -162,7 +162,7 @@ void Chat::addMessage()
 	if (to == "all")
 		_messageList.push_back(Message{ _currentUser->getLogin(), "all",text });
 	else
-		_messageList.push_back(Message{_currentUser->getLogin(),getUserByName(to)->getLogin(), text})
+		_messageList.push_back(Message{ _currentUser->getLogin(),getUserByName(to)->getLogin(), text });
 }
 
 void Chat::showChat() const
@@ -174,7 +174,7 @@ void Chat::showChat() const
 	for (auto& mess : _messageList)
 	{
 
-		if (_currentUser->getLogin() == mess.getFrom() || _currentUser->getLogin() == mess.getTo() == "all")
+		if (_currentUser->getLogin() == mess.getFrom() || _currentUser->getLogin() == mess.getTo() || mess.getTo() == "all")
 		{
 			from = (_currentUser->getLogin() == mess.getFrom()) ? "me" : getUserByLogin(mess.getFrom())->getName();
 
@@ -184,7 +184,7 @@ void Chat::showChat() const
 			}
 			else
 			{
-				to == (_currentUser->getLogin() == mess.getTo()) ? "me" : getUserByLogin(mess.getTo())->getName();
+				to = (_currentUser->getLogin() == mess.getTo()) ? "me" : getUserByLogin(mess.getTo())->getName();
 			}
 
 			std::cout << "Message from " << from << " to " << to << std::endl;
