@@ -59,7 +59,7 @@ void Chat::showLoginMenu()
 
 	do
 	{
-		std::cout << "\033[33m" << "(1)Login" << std::endl;
+		std::cout << "\033[32m" << "(1)Login" << std::endl;
 		std::cout << "(2)Registration" << std::endl;
 		std::cout << "(0)Exit" << std::endl;
 		std::cin >> operation;
